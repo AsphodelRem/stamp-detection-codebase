@@ -65,13 +65,21 @@ class LitSiameseNets(L.LightningModule):
     
     def forward(self, x1, x2):
         return self.model(x1, x2)
-    
-    def training_step(self, batch, batch_idx):
+
+    def step(self, batch, batch_idx, stage: str):
         img1, img2, labels = batch
         outputs = self(img1, img2)
         loss = self.criterion(outputs, labels)
-        self.log("train_loss", loss)
-        return loss
+        self.log(f"{stage}/loss", loss)
+
+        if stage == 'train':
+            return loss
+    
+    def training_step(self, batch, batch_idx):
+        return self.step(batch, batch_idx, 'train')
+
+    def test_step(self, batch, batch_idx):
+        self.step(batch, batch_idx, 'test')
     
     def configure_optimizers(self):
         return AdamW(

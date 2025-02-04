@@ -1,7 +1,7 @@
-defautls:
+defaults:
   - models: siamese_config
-  - dataset: siamese_dataset
   - dataloader: default_dataloader
+  - _self_
 
 trainer:
   optimizer:
@@ -15,5 +15,5 @@ trainer:
     enable_checkpointing: true  
     enable_progress_bar: true  
     deterministic: true  
-    gradient_clip_val: 1.0  #
+    gradient_clip_val: 1.0  
     accumulate_grad_batches: 1 

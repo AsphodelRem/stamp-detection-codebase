@@ -9,6 +9,5 @@ class ContrastiveLoss(nn.Module):
 
     def forward(self, outputs, labels):
         return torch.mean(
-            (1 - labels) * outputs**2
-            + labels * torch.clamp(self.margin - outputs, min=0) ** 2
+            (1 - labels) * outputs**2 + labels * torch.clamp(self.margin - outputs, min=0) ** 2
         )

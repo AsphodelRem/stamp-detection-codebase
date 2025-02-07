@@ -1,0 +1,6 @@
+hydra-core
+comet_ml
+lightning
+torch
+torchvision
+albumentations
